@@ -50,8 +50,8 @@ int main() {
     InitData(); // Inicialitzem les dades, com s'ha proporcionat en la pregunta
 
     // Exemple d'ús de la funció PrintVect
-    PrintVect(V1, 10, 20); // Mostra 20 elements del vector V1, començant des de la posició 10
-
+    PrintVect(V1, 0, 10); // Mostra 20 elements del vector V1, començant des de la posició 10
+    PrintVect(V1, 256, 10);
     return 0;
 }
 
