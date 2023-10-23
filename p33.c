@@ -31,7 +31,6 @@ void InitData(){
     }
 }
 
-// Funció per mostrar un vector a partir d'una posició donada
 void PrintVect(float vect[N], int from, int numel) {
     if (from < 0 || from >= N || numel <= 0 || from + numel > N) {
         printf("Error: Índex fora dels límits del vector.\n");
@@ -45,13 +44,31 @@ void PrintVect(float vect[N], int from, int numel) {
     printf("\n");
 }
 
+void PrintRow(float Mat[N][N], int row, int from, int numel) {
+    if (row < 0 || row >= N || from < 0 || from >= N || numel <= 0 || from + numel > N) {
+        printf("Paràmetres incorrectes\n");
+        return;
+    }
+
+    for (int i = from; i < from + numel; i++) {
+        printf("%.2f ", Mat[row][i]);
+    }
+
+    printf("\n");
+}
+
 int main() {
-    float V1[N]; // Declaració del vector V1
     InitData(); // Inicialitzem les dades, com s'ha proporcionat en la pregunta
 
     // Exemple d'ús de la funció PrintVect
     PrintVect(V1, 0, 10); // Mostra 20 elements del vector V1, començant des de la posició 10
     PrintVect(V1, 256, 10);
+ 
+    printf("Des de 0 a 9 de la fila 0\n");
+    PrintRow(Mat,0,0,10);
+    printf("Des de 0 a 9 de la fila 100\n");
+    PrintRow(Mat,100,0,10);   
+
     return 0;
 }
 
