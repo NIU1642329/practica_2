@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #define N 512 // Definim la constant N igual a 512
 
 float Mat[N][N];
@@ -71,6 +72,16 @@ float Scalar(float vect1[N], float vect2[N]) {
     return prod_esc;
 }
 
+float Magnitude(float vect[N]) {
+    float sum = 0.0;
+
+    for (int i = 0; i < N; i++) {
+        sum += vect[i] * vect[i];
+    }
+
+    return sqrt(sum);
+}
+
 int main() {
     InitData(); // Inicialitzem les dades, com s'ha proporcionat en la pregunta
 
@@ -83,12 +94,19 @@ int main() {
     PrintRow(Mat,100,0,10);   
 	
     float ResultVector[N];
-    float Scalar = 2.0;
-    MultEscalar(V1, ResultVector, Scalar);
+    float Scalart = 2.0;
+    MultEscalar(V1, ResultVector, Scalart);
     printf("Resultado de la multiplicación escalar:\n");
     PrintVect(ResultVector, 0, 10);
     PrintVect(ResultVector, 90, 10);
-
+   
+    printf("El producto escalar de los dos vectores es:\n");
+    Scalar(V1, V2);
+    
+    float vectorToCheck[N];
+    float magnitude = Magnitude(vectorToCheck);
+    printf("La magnitud del vector es: %f\n", magnitude);
+    
     return 0;
 }
 
