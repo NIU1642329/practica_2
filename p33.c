@@ -57,6 +57,12 @@ void PrintRow(float Mat[N][N], int row, int from, int numel) {
     printf("\n");
 }
 
+void MultEscalar(float vect[N], float vectres[N], float alfa) {
+    for (int i = 0; i < N; i++) {
+        vectres[i] = alfa * vect[i];
+    }
+}
+
 int main() {
     InitData(); // Inicialitzem les dades, com s'ha proporcionat en la pregunta
 
@@ -68,6 +74,18 @@ int main() {
     PrintRow(Mat,0,0,10);
     printf("Des de 0 a 9 de la fila 100\n");
     PrintRow(Mat,100,0,10);   
+	
+    float ResultVector[N];
+    float Scalar = 2.0;
+    MultEscalar(V1, ResultVector, Scalar);
+    printf("Resultado de la multiplicación escalar:\n");
+    PrintVect(ResultVector, 0, 10);
+    PrintVect(ResultVector, 90, 10);
+
+    printf("Elementos 0 al 9 de la fila 0 de MatDD:\n");
+    PrintRow(MatDD, 0, 0, 10);
+    printf("Elementos 90 a 99 de la fila 100 de MatDD:\n");
+    PrintRow(MatDD, 100, 90, 10);
 
     return 0;
 }
