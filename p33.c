@@ -61,6 +61,16 @@ void MultEscalar(float vect[N], float vectres[N], float alfa) {
     }
 }
 
+float Scalar(float vect1[N], float vect2[N]) {
+    float prod_esc = 0.0;
+
+    for (int i = 0; i < N; i++) {
+        prod_esc += vect1[i] * vect2[i];
+    }
+
+    return prod_esc;
+}
+
 int main() {
     InitData(); // Inicialitzem les dades, com s'ha proporcionat en la pregunta
 
