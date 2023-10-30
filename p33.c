@@ -32,28 +32,26 @@ void InitData(){
 }
 
 void PrintVect(float vect[N], int from, int numel) {
-    if (from < 0 || from >= N || numel <= 0 || from + numel > N) {
+    /*if (from < 0 || from >= N || numel <= 0 || from + numel > N) {
         printf("Error: Índex fora dels límits del vector.\n");
         return;
-    }
+    }*/
 
     printf("Vector elements from position %d to %d:\n", from, from + numel - 1);
     for (int i = from; i < from + numel; i++) {
-        printf("%.2f ", vect[i]);
+        printf("%f ", vect[i]);
     }
     printf("\n");
 }
 
 void PrintRow(float Mat[N][N], int row, int from, int numel) {
-    if (row < 0 || row >= N || from < 0 || from >= N || numel <= 0 || from + numel > N) {
+    /*if (row < 0 || row >= N || from < 0 || from >= N || numel <= 0 || from + numel > N) {
         printf("Paràmetres incorrectes\n");
         return;
-    }
-
+    }*/
     for (int i = from; i < from + numel; i++) {
-        printf("%.2f ", Mat[row][i]);
+        printf("%f ", Mat[row][i]);
     }
-
     printf("\n");
 }
 
@@ -66,8 +64,7 @@ void MultEscalar(float vect[N], float vectres[N], float alfa) {
 int main() {
     InitData(); // Inicialitzem les dades, com s'ha proporcionat en la pregunta
 
-    // Exemple d'ús de la funció PrintVect
-    PrintVect(V1, 0, 10); // Mostra 20 elements del vector V1, començant des de la posició 10
+    PrintVect(V1, 0, 10); // Mostra 10 elements del vector V1, començant des de la posició 0
     PrintVect(V1, 256, 10);
  
     printf("Des de 0 a 9 de la fila 0\n");
@@ -81,11 +78,6 @@ int main() {
     printf("Resultado de la multiplicación escalar:\n");
     PrintVect(ResultVector, 0, 10);
     PrintVect(ResultVector, 90, 10);
-
-    printf("Elementos 0 al 9 de la fila 0 de MatDD:\n");
-    PrintRow(MatDD, 0, 0, 10);
-    printf("Elementos 90 a 99 de la fila 100 de MatDD:\n");
-    PrintRow(MatDD, 100, 90, 10);
 
     return 0;
 }
