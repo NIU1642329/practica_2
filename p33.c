@@ -19,6 +19,7 @@ void InitData(){
 				MatDD[i][j] = (((i*j)%3) ? -1 : 1)*(rand()/(1.0*RAND_MAX));
 			else if ( i == j )
 				MatDD[i][j]=(((i*j)%3)?-1:1)*(10000.0*(rand()/(1.0*RAND_MAX)));
+
 			else MatDD[i][j] = 0.0;
 		}
 	for( i = 0; i < N; i++ ){
@@ -27,6 +28,7 @@ void InitData(){
 		V3[i]=(((i*j)%5)?-1:1)*(100.0*(rand()/(1.0*RAND_MAX)));
 	}
 }
+
 void PrintVect(float vect[N], int from, int numel) {
     printf("Vector elements from position %d to %d:\n", from, from + numel - 1);
     for (int i = from; i < from + numel; i++) {
@@ -75,6 +77,25 @@ void Projection(float vect1[N], float vect2[N], float vectres[N]) {
     for (int i = 0; i < N; i++) {
         vectres[i] = (dotProduct / magnitudeV2) * vect2[i];
     }
+}
+
+int Ortogonal(float vect1[N],float vect2[N] ) {
+	int ortogonal = 0;	
+	float prod_esc = Scalar(vect1,vect2);
+	if (prod_esc == 0.0) {
+		ortogonal = 1;
+	}
+	return ortogonal;
+}
+
+float NormFrobenius( float M[N][N] ) {
+	float sum = 0.0;	
+	for (int i = 0; i < N; i++) {
+        	for (int j = 0; j < N; j++) {
+            		sum += M[i][j] * M[i][j];
+        	}
+    	}
+    return sqrt(sum);
 }
 
 int main() {
