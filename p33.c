@@ -28,11 +28,6 @@ void InitData(){
 	}
 }
 void PrintVect(float vect[N], int from, int numel) {
-    /*if (from < 0 || from >= N || numel <= 0 || from + numel > N) {
-        printf("Error: Índex fora dels límits del vector.\n");
-        return;
-    }*/
-
     printf("Vector elements from position %d to %d:\n", from, from + numel - 1);
     for (int i = from; i < from + numel; i++) {
         printf("%f ", vect[i]);
@@ -41,10 +36,6 @@ void PrintVect(float vect[N], int from, int numel) {
 }
 
 void PrintRow(float Mat[N][N], int row, int from, int numel) {
-    /*if (row < 0 || row >= N || from < 0 || from >= N || numel <= 0 || from + numel > N) {
-        printf("Paràmetres incorrectes\n");
-        return;
-    }*/
     for (int i = from; i < from + numel; i++) {
         printf("%f ", Mat[row][i]);
     }
@@ -69,23 +60,23 @@ float Scalar(float vect1[N], float vect2[N]) {
 
 float Magnitude(float vect[N]) {
     float sum = 0.0;
-
     for (int i = 0; i < N; i++) {
         sum += vect[i] * vect[i];
     }
-
     return sqrt(sum);
 }
 
-int Ortogonal( float vect1[N], float vect2[N] ) {
-	bool ortogonal = False;
-	float prod_esc = Scalar(vect1[N],vect2[N];
-	
-	if (prod_esc == 0.0) {
-		ortogonal = True;
-	}
-	return ortogonal;
+void Projection(float vect1[N], float vect2[N], float vectres[N]) {
+    float dotProduct = 0.0;
+    float magnitudeV2 = Magnitude(vect2);
+    for (int i = 0; i < N; i++) {
+        dotProduct += vect1[i] * vect2[i];
+    }
+    for (int i = 0; i < N; i++) {
+        vectres[i] = (dotProduct / magnitudeV2) * vect2[i];
+    }
 }
+
 int main() {
     InitData(); // Inicialitzem les dades, com s'ha proporcionat en la pregunta
 
@@ -111,12 +102,16 @@ int main() {
     PrintVect(V1Scaled, 0, 10);
     float dotProduct = Scalar(V1, V1Scaled);
     printf("Producto escalar entre V1 y V1Scaled: %f\n", dotProduct);
-
+    
     float magnitudeV1 = Magnitude(V1);
     float magnitudeV2 = Magnitude(V2);
     printf("Magnitud de V1: %f\n", magnitudeV1);
     printf("Magnitud de V2: %f\n", magnitudeV2);
    
+    float projectionResult[N];
+    Projection(V1, V2, projectionResult);
+    printf("Proyección de V1 sobre V2:\n");
+    PrintVect(projectionResult, 0, 10); // Puedes imprimir los primeros 10 elementos de la proyección
 
 
     return 0;
