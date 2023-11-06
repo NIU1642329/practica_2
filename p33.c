@@ -103,6 +103,13 @@ int main() {
     float dotProduct = Scalar(V1, V1Scaled);
     printf("Producto escalar entre V1 y V1Scaled: %f\n", dotProduct);
 
+    float magnitudeV1 = Magnitude(V1);
+    float magnitudeV2 = Magnitude(V2);
+    printf("Magnitud de V1: %f\n", magnitudeV1);
+    printf("Magnitud de V2: %f\n", magnitudeV2);
+   
+
+
     return 0;
 }
 
