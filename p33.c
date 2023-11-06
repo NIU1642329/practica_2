@@ -98,6 +98,26 @@ float NormFrobenius( float M[N][N] ) {
     return sqrt(sum);
 }
 
+int DiagonalDom(float M[N][N]) {
+    for (int i = 0; i < N; i++) {
+        float diagonal = fabs(M[i][i]);//valor absolut
+
+        float sum = 0.0; 
+
+        for (int j = 0; j < N; j++) {
+            if (j != i) { 
+                sum += fabs(M[i][j]);
+            }
+        }
+
+        if (diagonal < sum) {
+            return 0; // no és diagonal dominant
+        }
+    }
+
+    return 1;// és diagonal dominant
+}
+
 int main() {
     InitData(); // Inicialitzem les dades, com s'ha proporcionat en la pregunta
 
