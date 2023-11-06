@@ -78,11 +78,12 @@ float Magnitude(float vect[N]) {
 }
 
 int Ortogonal( float vect1[N], float vect2[N] ) {
-	bool ortogonal = False;
-	float prod_esc = Scalar(vect1[N],vect2[N];
+	int ortogonal = 0;
+	
+	float prod_esc = Scalar(vect1[N],vect2[N]);
 	
 	if (prod_esc == 0.0) {
-		ortogonal = True;
+		ortogonal = 1;
 	}
 	return ortogonal;
 }
