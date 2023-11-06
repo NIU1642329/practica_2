@@ -79,9 +79,9 @@ void Projection(float vect1[N], float vect2[N], float vectres[N]) {
     }
 }
 
-int Ortogonal(float vect1[N],float vect2[N] ) {
-	int ortogonal = 0;	
-	float prod_esc = Scalar(vect1,vect2);
+int Ortogonal( float vect1[N], float vect2[N] ) {
+	int ortogonal = 0;
+	float prod_esc = Scalar(vect1, vect2);
 	if (prod_esc == 0.0) {
 		ortogonal = 1;
 	}
@@ -132,7 +132,7 @@ int main() {
     float projectionResult[N];
     Projection(V1, V2, projectionResult);
     printf("Proyección de V1 sobre V2:\n");
-    PrintVect(projectionResult, 0, 10); // Puedes imprimir los primeros 10 elementos de la proyección
+    PrintVect(projectionResult, 0, 10);
 
 
     return 0;
