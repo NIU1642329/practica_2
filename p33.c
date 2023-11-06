@@ -88,6 +88,20 @@ int Ortogonal( float vect1[N], float vect2[N] ) {
 	return ortogonal;
 }
 
+float Infininorm(float M[N][N]) {
+    float maxSum = 0.0;
+    for (int i = 0; i < N; i++) {
+        float rowSum = 0.0;
+        for (int j = 0; j < N; j++) {
+            rowSum += fabs(M[i][j]);
+        }
+        if (rowSum > maxSum) {
+            maxSum = rowSum;
+        }
+    }
+    return maxSum;
+}
+
 float NormFrobenius( float M[N][N] ) {
 	float sum = 0.0;	
 	for (int i = 0; i < N; i++) {
@@ -96,6 +110,20 @@ float NormFrobenius( float M[N][N] ) {
         	}
     	}
     return sqrt(sum);
+}
+
+float Onenorm(float M[N][N]) {
+    float maxSum = 0.0;
+    for (int j = 0; j < N; j++) {
+        float columnSum = 0.0;
+        for (int i = 0; i < N; i++) {
+            columnSum += fabs(M[i][j]);
+        }
+        if (columnSum > maxSum) {
+            maxSum = columnSum;
+        }
+    }
+    return maxSum;
 }
 
 int DiagonalDom(float M[N][N]) {
@@ -153,6 +181,12 @@ int main() {
     Projection(V1, V2, projectionResult);
     printf("Proyección de V1 sobre V2:\n");
     PrintVect(projectionResult, 0, 10);
+
+    float infiniNormResult = Infininorm(Mat);
+    printf("Infinito-norma de la matriz Mat: %f\n", infiniNormResult);
+
+    float onenormResult = Onenorm(Mat);
+    printf("Norma-ú de la matriz Mat: %f\n", onenormResult);
 
 
     return 0;
