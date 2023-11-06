@@ -87,6 +87,17 @@ int Ortogonal( float vect1[N], float vect2[N] ) {
 	}
 	return ortogonal;
 }
+float NormFrobenius( float M[N][N] ) {
+	float sum = 0.0;
+	
+	for (int i = 0; i < N; i++) {
+        	for (int j = 0; j < N; j++) {
+            		sum += M[i][j] * M[i][j];
+        	}
+    	}
+
+    return sqrt(sum);
+}
 int main() {
     InitData(); // Inicialitzem les dades, com s'ha proporcionat en la pregunta
 
