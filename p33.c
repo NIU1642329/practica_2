@@ -82,6 +82,15 @@ float Magnitude(float vect[N]) {
     return sqrt(sum);
 }
 
+int Ortogonal( float vect1[N], float vect2[N] ) {
+	bool ortogonal = False;
+	float prod_esc = Scalar(vect1[N],vect2[N];
+	
+	if (prod_esc == 0.0) {
+		ortogonal = True;
+	}
+	return ortogonal;
+}
 int main() {
     InitData(); // Inicialitzem les dades, com s'ha proporcionat en la pregunta
 
