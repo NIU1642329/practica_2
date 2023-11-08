@@ -142,8 +142,53 @@ int DiagonalDom(float M[N][N]) {
             return 0; // no és diagonal dominant
         }
     }
-
     return 1;// és diagonal dominant
+}
+
+int Jacobi(float M[N][N], float vect[N], float vectres[N], unsigned iter) {
+    // Comprueba si la matriz M es diagonal dominante
+    int isDiagonalDominant = 1;
+    for (int i = 0; i < N; i++) {
+        float diagonalValue = fabs(M[i][i]);
+        float rowSum = 0.0;
+
+        for (int j = 0; j < N; j++) {
+            if (i != j) {
+                rowSum += fabs(M[i][j]);
+            }
+        }
+
+        if (diagonalValue <= rowSum) {
+            isDiagonalDominant = 0;
+            break;
+        }
+    }
+    if (isDiagonalDominant == 0) {
+        return 0; // El método de Jacobi no se puede aplicar en esta matriz
+    }
+    // Inicializa el vector resultado con ceros
+    for (int i = 0; i < N; i++) {
+        vectres[i] = 0.0;
+    }
+    // Realiza iteraciones de Jacobi
+    for (unsigned k = 0; k < iter; k++) {
+        for (int i = 0; i < N; i++) {
+            float sum = 0.0;
+
+            for (int j = 0; j < N; j++) {
+                if (i != j) {
+                    sum += M[i][j] * vect[j];
+                }
+            }
+
+            vectres[i] = (vect[i] - sum) / M[i][i];
+        }
+        // Actualiza el vector vect con los resultados de la iteración actual
+        for (int i = 0; i < N; i++) {
+            vect[i] = vectres[i];
+        }
+    }
+    return 1; // El método de Jacobi se aplicó con éxito
 }
 
 int main() {
@@ -188,7 +233,16 @@ int main() {
     float onenormResult = Onenorm(Mat);
     printf("Norma-ú de la matriz Mat: %f\n", onenormResult);
 
-
+    float vectInicial[N];
+    float vectResultado[N];
+    unsigned numIteraciones = 100;
+    int jacobiResult = Jacobi(Mat, vectInicial, vectResultado, numIteraciones);
+    if (jacobiResult) {
+        printf("Resultado del método de Jacobi:\n");
+        PrintVect(vectResultado, 0, 10); // Puedes imprimir los primeros 10 elementos del resultado
+    } else {
+        printf("El método de Jacobi no se puede aplicar en esta matriz.\n");
+    }
     return 0;
 }
 
