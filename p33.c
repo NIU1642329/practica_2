@@ -7,6 +7,7 @@ float MatDD[N][N];
 float V1[N];
 float V2[N];
 float V3[N];
+float V4[N];
 void InitData(){
 	int i,j;
         srand(4422543);
@@ -61,8 +62,7 @@ float Scalar(float vect1[N], float vect2[N]) {
 
 //5
 float Magnitude(float vect[N]) {
-        float prod_esc = Scalar(vect, vect);
-        return sqrt(prod_esc);
+        return sqrt(Scalar(vect,vect));
 }
 
 //6
@@ -85,32 +85,32 @@ void Projection(float vect1[N], float vect2[N], float vectres[N]) {
 
 //8
 float Infininorm(float M[N][N]) {
-    float maxSum = 0.0;
+    float maxsum = 0.0;
     for (int i = 0; i < N; i++) {
-        float rowSum = 0.0;
+        float sum = 0.0;
         for (int j = 0; j < N; j++) {
-            rowSum += fabs(M[i][j]);
+            sum += fabs(M[i][j]);
         }
-        if (rowSum > maxSum) {
-            maxSum = rowSum;
+        if (sum > maxsum) {
+            maxsum = sum;
         }
     }
-    return maxSum;
+    return maxsum;
 }
 
 //9
 float Onenorm(float M[N][N]) {
-    float maxSum = 0.0;
+    float maxsum = 0.0;
     for (int j = 0; j < N; j++) {
-        float columnSum = 0.0;
+        float sum = 0.0;
         for (int i = 0; i < N; i++) {
-            columnSum += fabs(M[i][j]);
+            sum += fabs(M[i][j]);
         }
-        if (columnSum > maxSum) {
-            maxSum = columnSum;
+        if (sum > maxsum) {
+            maxsum = sum;
         }
     }
-    return maxSum;
+    return maxsum;
 }
 
 //10
@@ -127,8 +127,7 @@ float NormFrobenius( float M[N][N] ) {
 //11
 int DiagonalDom(float M[N][N]) {
     for (int i = 0; i < N; i++) {
-        float diagonal = fabs(M[i][i]);//valor diagonal de la fila en valor absolut
-
+        float diagonal = fabs(M[i][i]);
         float sum = 0.0;
 
         for (int j = 0; j < N; j++) {
@@ -138,11 +137,11 @@ int DiagonalDom(float M[N][N]) {
         }
 
         if (diagonal < sum ) {
-            return 0; // no és diagonal dominant
+            return 0;
         }
     }
 
-    return 1;// és diagonal dominant
+    return 1;
 }
 
 //12
@@ -151,28 +150,26 @@ int Jacobi(float M[N][N], float vect[N], float vectres[N], unsigned iter) {
         int diagonaldominant = DiagonalDom(M);
 
         if (diagonaldominant == 0) {
-        return 0; // El mètode Jacobi no es pot aplicar
+        return 0;
         }
 
-        // Realiza iteraciones de Jacobi
-        for (unsigned k = 0; k < iter; k++) {
+        for (int k = 0; k < iter; k++) {
                 for (int i = 0; i < N; i++) {
                         float sum = 0.0;
-
-                for (int j = 0; j < N; j++) {
-                        if (i != j) {
-                                sum += M[i][j] * vect[j];
-                        }
-                }
-
-                vectres[i] = (vect[i] - sum) / M[i][i];
-        }
+		
+	                for (int j = 0; j < N; j++) {
+        	                if (i != j) {
+                	                sum += M[i][j] * vect[j];
+                       		 }
+                	}
+		vectres[i] = (vect[i] - sum) / M[i][i];
+	}
         // Actualiza el vector vect
         for (int i = 0; i < N; i++) {
             vect[i] = vectres[i];
         }
-    }
-    return 1; // El mètode de Jacobi s'ha aplicat
+	}
+    return 1;
 }
 
 
@@ -249,55 +246,53 @@ int main() {
         }
 	//H
         printf("\n\nEls elements del 0 al 9 del resultat de multiplicar V3x2.0 són:\n");
-        float vect_multi[N];
-        MultEscalar(V3,vect_multi,0.2);
-        PrintVect(vect_multi, 0, 10);
+        MultEscalar(V3,V4,0.2);
+        PrintVect(V4, 0, 10);
         printf("\nEls elements del 256 al 265 del resultat de multiplicar V3x2.0 són:\n");
-        PrintVect(vect_multi, 256, 10);
+        PrintVect(V4, 256, 10);
         
 	//I
         printf("\n\n\nEls elements del 0 al 9 del resultat de la projecció de V2 sobre V3 són:\n");
-        float vect_projecció[N];
-        Projection(V2,V3,vect_projecció);
-        PrintVect(vect_projecció,0,10);
+        Projection(V2,V3,V4);
+        PrintVect(V4,0,10);
         printf("\nEls elements del 0 al 9 del resultat de la projecció de V1 sobre V2 són:\n");
-        float vect_projeccio_dos[N];
-        Projection(V1,V2,vect_projeccio_dos);
-        PrintVect(vect_projeccio_dos,0,10);
+        Projection(V1,V2,V4);
+        PrintVect(V4,0,10);
 
 	//J
-        float X_1[N];
-        int jacobi_1 = Jacobi(MatDD,V3,X_1,1);
+	//matriu MatDD 1 iteració
+        int jacobi_1 = Jacobi(MatDD,V3,V4,1);
         if (jacobi_1 == 0){
                 printf("\n\n\nLa matriu MatDD no és diagonal dominant, no es pot aplicar Jacobi\n");
         } else {
-                printf("\n\n\nEls elements de 0 a 9 de la solució (1 iter) del sistma d'equacions MatDD*X = V2 són:\n");
-                PrintVect(X_1,0,10);
+                printf("\n\n\nEls elements de 0 a 9 de la solució (1 iter) del sistma d'equacions MatDD*X = V3 són:\n");
+                PrintVect(V4,0,10);
         }
-        float X_1000[N];
-        int jacobi_1000 = Jacobi(MatDD,V3,X_1000,1);
+
+	//matriu MatDD 1000 iteracions
+        int jacobi_1000 = Jacobi(MatDD,V3,V4,1000);
         if (jacobi_1000 == 0){
                 printf("\nLa matriu Mat no és diagonal dominant, no es pot aplicar Jacobi\n");
         } else {
                 printf("\nEls elements de 0 a 9 de la solució (1000 iters) del sistma d'equacions Mat*X = V3 són:\n");
-                PrintVect(X_1000,0,10);
+                PrintVect(V4,0,10);
         }
 	
-	float Xd_1[N];
-        int jacobi_d_1 = Jacobi(Mat,V3,Xd_1,1);
+	//matriu Mat 1 iteració
+        int jacobi_d_1 = Jacobi(Mat,V3,V4,1);
         if (jacobi_d_1 == 0){
                 printf("\n\n\nLa matriu Mat no és diagonal dominant, no es pot aplicar Jacobi\n");
         } else {
                 printf("\n\n\nEls elements de 0 a 9 de la solució (1 iter) del sistma d'equacions són:\n");
-                PrintVect(Xd_1,0,10);
+                PrintVect(V4,0,10);
         }
-        float Xd_1000[N];
-        int jacobi_d_1000 = Jacobi(Mat,V3,Xd_1000,1);
+	//matriu Mat 1000 iteracions
+        int jacobi_d_1000 = Jacobi(Mat,V3,V4,1000);
         if (jacobi_d_1000 == 0){
                 printf("\nLa matriu Mat no és diagonal dominant, no es pot aplicar Jacobi\n");
         } else {
                 printf("\nEls elements de 0 a 9 de la solució (1000 iters) del sistma d'equacions són:\n");
-                PrintVect(Xd_1000,0,10);
+                PrintVect(V4,0,10);
         }
 
 }
