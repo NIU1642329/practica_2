@@ -266,21 +266,38 @@ int main() {
         PrintVect(vect_projeccio_dos,0,10);
 
 	//J
-        float solu_1[N];
-        int jacobi_1 = Jacobi(MatDD,V3,solu_1,1);
+        float X_1[N];
+        int jacobi_1 = Jacobi(MatDD,V3,X_1,1);
         if (jacobi_1 == 0){
                 printf("\n\n\nLa matriu MatDD no és diagonal dominant, no es pot aplicar Jacobi\n");
         } else {
-                printf("\n\n\nEls elements de 0 a 9 de la solució (1 iter) del sistma d'equacions són:\n");
-                PrintVect(solu_1,0,10);
+                printf("\n\n\nEls elements de 0 a 9 de la solució (1 iter) del sistma d'equacions MatDD*X = V2 són:\n");
+                PrintVect(X_1,0,10);
         }
-        float solu_1000[N];
-        int jacobi_1000 = Jacobi(Mat,V3,solu_1000,1);
+        float X_1000[N];
+        int jacobi_1000 = Jacobi(MatDD,V3,X_1000,1);
         if (jacobi_1000 == 0){
                 printf("\nLa matriu Mat no és diagonal dominant, no es pot aplicar Jacobi\n");
         } else {
+                printf("\nEls elements de 0 a 9 de la solució (1000 iters) del sistma d'equacions Mat*X = V3 són:\n");
+                PrintVect(X_1000,0,10);
+        }
+	
+	float Xd_1[N];
+        int jacobi_d_1 = Jacobi(Mat,V3,Xd_1,1);
+        if (jacobi_d_1 == 0){
+                printf("\n\n\nLa matriu Mat no és diagonal dominant, no es pot aplicar Jacobi\n");
+        } else {
+                printf("\n\n\nEls elements de 0 a 9 de la solució (1 iter) del sistma d'equacions són:\n");
+                PrintVect(Xd_1,0,10);
+        }
+        float Xd_1000[N];
+        int jacobi_d_1000 = Jacobi(Mat,V3,Xd_1000,1);
+        if (jacobi_d_1000 == 0){
+                printf("\nLa matriu Mat no és diagonal dominant, no es pot aplicar Jacobi\n");
+        } else {
                 printf("\nEls elements de 0 a 9 de la solució (1000 iters) del sistma d'equacions són:\n");
-                PrintVect(solu_1000,0,10);
+                PrintVect(Xd_1000,0,10);
         }
 
 }
