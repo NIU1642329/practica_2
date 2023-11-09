@@ -196,7 +196,7 @@ int main() {
         PrintRow(Mat,100,0,10);
 
         //C
-        printf("\n\n\nMatDD fila 0 del 0 al 9 i fila 100 del 95 al 104");
+        printf("\n\n\nMatDD fila 0 del 0 al 9 i fila 100 del 95 al 104\n");
         PrintRow(MatDD,0,0,10);
         PrintRow(MatDD,100,95,10);
 
@@ -230,7 +230,7 @@ int main() {
         //E
         printf("\n\nEscalar <V1,V2> = %f \nEscalar <V1,V3> = %f \nEscalar <V2,V3> = %f", Scalar(V1,V2),Scalar(V1,V3),Scalar(V2,V3));
         //F
-        printf("\n\n\nEscalar V1 = %f \nMagnitud V2 = %f \nMagnitud V3 = %f\n\n\n",Magnitude(V1),Magnitude(V2),Magnitude(V3));
+        printf("\n\n\nMagnitud V1 = %f \nMagnitud V2 = %f \nMagnitud V3 = %f\n\n\n",Magnitude(V1),Magnitude(V2),Magnitude(V3));
         //G
         if (Ortogonal(V1, V2) == 1) {
                 printf("V1 i V2 són ortogonals\n");
