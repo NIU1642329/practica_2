@@ -163,11 +163,7 @@ int Jacobi(float M[N][N], float vect[N], float vectres[N], unsigned iter) {
                        		 }
                 	}
 		vectres[i] = (vect[i] - sum) / M[i][i];
-	}
-        // Actualiza el vector vect
-        for (int i = 0; i < N; i++) {
-            vect[i] = vectres[i];
-        }
+		}
 	}
     return 1;
 }
@@ -175,8 +171,9 @@ int Jacobi(float M[N][N], float vect[N], float vectres[N], unsigned iter) {
 
 // funció principal
 int main() {
-        //A
         InitData();
+
+	//A
         printf("V1 del 0 al 9 i del 256 al 265:\n");
         PrintVect(V1, 0, 10);
         PrintVect(V1, 256, 10);
@@ -274,7 +271,7 @@ int main() {
         if (jacobi_1000 == 0){
                 printf("\nLa matriu Mat no és diagonal dominant, no es pot aplicar Jacobi\n");
         } else {
-                printf("\nEls elements de 0 a 9 de la solució (1000 iters) del sistma d'equacions Mat*X = V3 són:\n");
+                printf("\nEls elements de 0 a 9 de la solució (1000 iters) del sistma d'equacions MatDD*X = V3 són:\n");
                 PrintVect(V4,0,10);
         }
 	
